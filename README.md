@@ -1,5 +1,5 @@
 # Real time mask-detection on Rasp 3B+ use Yolov3-tiny
-
+10/27,, 수정중 ,,Due date : 11/10
 ## Model Selection
 Mask –Detection을 하기 위해 모델을 선정하던중 네가지 후보 모델을 고려하였다.
 - Faster R-CNN
