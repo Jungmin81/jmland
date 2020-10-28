@@ -83,11 +83,18 @@ Complie 관련 issue는 위 사이트를 참고했다.
 
 모델은 real-time에 적합한 tiny-yolo를 사용하였다.
 
-loss graph와 iteration별 validation set을 이용한 map 수치 그래프이다.
+다음 사진은 loss graph와 iteration별 validation set을 이용한 map 수치 그래프이다.단순 비교를 위해 일반 YOLO 모델도 분석해봤다.
 
-![image](https://user-images.githubusercontent.com/39875941/97408543-934f1680-193f-11eb-917d-b42348282307.png)
-![image](https://user-images.githubusercontent.com/39875941/97408642-b974b680-193f-11eb-9a31-1b40fd94dbcd.png)
+![chart_n_yolov3-tiny2](https://user-images.githubusercontent.com/39875941/97408940-3011b400-1940-11eb-87a8-b340f38c0deb.png)
 
+
+
+<center>YOLO v3-tiny</center>
+
+---
+![chart_yolov3-custom](https://user-images.githubusercontent.com/39875941/97408945-31db7780-1940-11eb-94a1-b118bbfa7389.png)
+
+<center>YOLO v3</center>
 
 YOLO-tiny :About 2 hours YOLO :About 15 hours
 
@@ -137,11 +144,17 @@ Object Detection 모델에서 고려해야 하는건 세가지이다.
 
 - 1.여기서 알 수 있는 문제점 Iou가 50%로 위의 사진처럼 예측이 제대로 되는건 아니다.즉,잘 맞추긴 맞췄으나,맞춰야 하는 부분의 50%정도만 예측하고 있는 상황이다.
 
-		YOLO					Yolo-tiny
+| Case | Yolo | Yolo-tiny |
+|:---:|:---:|:---:|
+|1|![image](https://user-images.githubusercontent.com/39875941/97409490-0907b200-1941-11eb-8dc0-b3484ea1c4b4.png)|![image](https://user-images.githubusercontent.com/39875941/97409502-0e64fc80-1941-11eb-97da-34769381eac5.png)|
+|2|![image](https://user-images.githubusercontent.com/39875941/97409515-145add80-1941-11eb-8eaf-44307ecfbf27.png)|![image](https://user-images.githubusercontent.com/39875941/97409508-12911a00-1941-11eb-9cf5-fbc4c391dc9f.png)|
 
-둘 다 비교적 잘잡긴 하나 tiny모델은 오탐지 1건 미탐지 1건의 차이를 찾을 수 있다.
 
-		YOLO-Tiny				YOLO
+둘 다 비교적 잘잡긴 하나 tiny모델은 case 1의 경우 오탐지 1건 미탐지 1건의 차이를 찾을 수 있다.
+
 - 2.DeepSORT 알고리즘적용
 
+
+![image](https://user-images.githubusercontent.com/39875941/97409508-12911a00-1941-11eb-9cf5-fbc4c391dc9f.png)
+![image](https://user-images.githubusercontent.com/39875941/97409515-145add80-1941-11eb-8eaf-44307ecfbf27.png)
 SORT = 디텍터 + 칼만필터 + 헝가리안 알고리즘 DeepSORT = 딥러닝 + SORT
