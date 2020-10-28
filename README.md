@@ -2,23 +2,46 @@
 10/27,, 수정중 ,,Due date : 11/10
 ## Model Selection
 Mask –Detection을 하기 위해 모델을 선정하던중 네가지 후보 모델을 고려하였다.
+
 - Faster R-CNN
- 조사해본결과,R-cnn은 정확하고 겹쳐지거나 작은 사물에 대한 인식률은 높지만 많이 느리고 실시간을 생각하고 만든 네트워크는 아니므로 배제하였다.빠르고 사용이 쉽고 비교적 정확하지만 겹쳐진 사물의 구분이 어렵다는 단점이 있다.
- - Harr Classifier
-Haar Classifier는 엄청 단순하고 빠르며 단순하다 하지만 영상의 밝기 값을 이용하기 때문에 조명,대조비에 영향을 많이 받고Sample의 양이나 질에 따라 성능에 영향을 크다 그리고 제일 큰 단점은 다소 정확하지 않다는 점이다.
+
+ R-CNN은 정확하고 겹쳐지거나 작은 사물에 대한 인식률은 높지만 많이 느리고 `실시간을 생각하고 만든 네트워크는 아니므로` 배제하였다.
+ 
+ - YOLO
+
+YOLO(You Only Look One)은 빠르고 비교적 정확하고 사용이 쉽다.하지만 `겹쳐진 사물의 구분이 어렵다`는 단점이 있다.
+
+| ![image](https://user-images.githubusercontent.com/39875941/97379913-4a7c6b00-1909-11eb-81db-2878be4f3754.png)| ![image](https://user-images.githubusercontent.com/39875941/97380452-67fe0480-190a-11eb-9e14-8e01632ee280.png)|
+|-|-|
+
 - SSD
-SSD(Single Shot MultiBox Detector)는 비교적 빠르고 정확하며,백본 네트워크를 바꿔가며 사용이 용이하여 성능과 속도를 어느정도 조절이 가능하며 유사네트워크가 많이 있지만,사용하기 쉽지가 않다는 단점이 있었다.
-- YOLO
-YOLO(You Only Look One)은 빠르고 비교적 정확하며,비교적 사용이 쉽다.하지만 겹쳐진 사물의 구분이 어렵다는 단점이 있다.
+
+
+
+SSD(Single Shot MultiBox Detector)는 비교적 빠르고 정확하며,백본 네트워크를 바꿔가며 사용이 용이하여 성능과 속도를 어느정도 조절이 가능하며 유사네트워크가 많이 있지만,`사용하기 쉽지가 않다`는 단점이 있었다.
+
+![image](https://user-images.githubusercontent.com/39875941/97380911-5537ff80-190b-11eb-9d42-4dccb5853a6e.png)
+
+- Haar Classifier
+
+Haar Classifier는 엄청 단순하고 빠르며 단순하다 하지만 영상의 밝기 값을 이용하기 때문에 조명,대조비에 영향을 많이 받고,Sample의 양이나 질에 따라 성능에 영향을 크다 그리고 제일 큰 단점은 `다소 정확하지 않다는 점`이다.
+
+![image](https://user-images.githubusercontent.com/39875941/97381191-e60edb00-190b-11eb-9d96-7da59feb1564.png)
+
 
 이 사항들을 모두 고려해봤을 때 yolo를 사용하는게 제일 적합하다고 생각하여 yolo를 사용하게 되었다.
+
 ## Data Preparation
+![image](https://user-images.githubusercontent.com/39875941/97381302-2b330d00-190c-11eb-8e09-94678695f098.png)
 https://github.com/tzutalin/labelImg(데이터 라벨링 툴)을 이용하여 2개의 class(mask,no-mask)를 yolo데이터셋을 만듬.각 클래스 별 100개정도 총 200개의 데이터로 모델 학습을 진행하였다.
+
 validation과 train 데이터의 비율은 9:1로 진행하였다.처음에 소량의 데이터로 진행해서 그런지 detection이 제대로 되지않아 kaggle에서 데이터셋을 구한뒤 다시 진행 하였다.
+
 https://www.kaggle.com/andrewmvd/face-mask-detection
 하지만 해당 데이터셋은 pascal voc 형식의 xml데이터셋이었고,yolo 형식 xml 데이터셋으로 전환을 하기위해
 https://bblib.net/entry/convert-voc-to-yolo-xml-to-yolo-xml-to-txt
 해당 모듈을 사용하였다.
+
 또한 마스크를 이상하게 착용한 것 까지 탐지 시켜주기 위해 클래스를 한 개 추가 시켜 총 3개의 클래스로 진행을 하였다.
 windows 환경에서 compile을 수행하였고
 모델은 real-time에 적합한 tiny-yolo를 사용하였다.
