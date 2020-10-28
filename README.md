@@ -85,18 +85,13 @@ Complie 관련 issue는 위 사이트를 참고했다.
 
 다음 사진은 loss graph와 iteration별 validation set을 이용한 map 수치 그래프이다.단순 비교를 위해 일반 YOLO 모델도 분석해봤다.
 
-![chart_n_yolov3-tiny2](https://user-images.githubusercontent.com/39875941/97408940-3011b400-1940-11eb-87a8-b340f38c0deb.png)
+| Yolo-tiny | Taken Time | Yolo | Taken Time |
+|:---:|:---:|:---:|:---:|
+|![chart_n_yolov3-tiny2](https://user-images.githubusercontent.com/39875941/97408940-3011b400-1940-11eb-87a8-b340f38c0deb.png)|2 hours|![chart_yolov3-custom](https://user-images.githubusercontent.com/39875941/97408945-31db7780-1940-11eb-94a1-b118bbfa7389.png)|15 hours|
 
 
 
-<center>YOLO v3-tiny</center>
-
----
-![chart_yolov3-custom](https://user-images.githubusercontent.com/39875941/97408945-31db7780-1940-11eb-94a1-b118bbfa7389.png)
-
-<center>YOLO v3</center>
-
-YOLO-tiny :About 2 hours YOLO :About 15 hours
+각 모델의 train 소요 시간 : YOLO-tiny :About 2 hours YOLO :About 15 hours
 
 GCP등을 활용했다면 더 빠른 시간안에 가능하다.
 
