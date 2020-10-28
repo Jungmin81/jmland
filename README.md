@@ -68,7 +68,7 @@ classes = ['with_mask','without_mask','mask_weared_incorrect']#클래스 설정
 
 해당 데이터셋은 마스크를 이상하게 쓴 데이터를 포함해 총 3개의 클래스로 데이터셋 준비를 하였다.
 
-## Complie Yolo
+## Complie Yolo & train Model
 
 ![image](https://user-images.githubusercontent.com/39875941/97408437-6c90e000-193f-11eb-8986-26135692a27b.png)
 
@@ -77,9 +77,9 @@ classes = ['with_mask','without_mask','mask_weared_incorrect']#클래스 설정
 
 https://github.com/AlexeyAB/darknet
 
-Windows 환경에서 Compile을 수행하였고 GPU 는 GTX 1650을 사용하였다.
+Windows 환경에서 Compile을 수행하였고 GPU 는 `GTX 1650`을 사용하였다.
 
-Complie 관련 issue는 위 사이트를 참고했다.
+Complie 관련 issue는 위 사이트를 참고했고,`General Configure`을 사용하였다.
 
 모델은 real-time에 적합한 tiny-yolo를 사용하였다.
 
@@ -87,24 +87,31 @@ Complie 관련 issue는 위 사이트를 참고했다.
 
 | Yolo-tiny | Taken Time | Yolo | Taken Time |
 |:---:|:---:|:---:|:---:|
-|![chart_n_yolov3-tiny2](https://user-images.githubusercontent.com/39875941/97408940-3011b400-1940-11eb-87a8-b340f38c0deb.png)|2 hours|![chart_yolov3-custom](https://user-images.githubusercontent.com/39875941/97408945-31db7780-1940-11eb-94a1-b118bbfa7389.png)|15 hours|
+|![chart_n_yolov3-tiny2](https://user-images.githubusercontent.com/39875941/97408940-3011b400-1940-11eb-87a8-b340f38c0deb.png)|**2 hours**|![chart_yolov3-custom](https://user-images.githubusercontent.com/39875941/97408945-31db7780-1940-11eb-94a1-b118bbfa7389.png)|**15 hours**|
 
-
-
-각 모델의 train 소요 시간 : YOLO-tiny :About 2 hours YOLO :About 15 hours
 
 GCP등을 활용했다면 더 빠른 시간안에 가능하다.
 
-위에서 알 수 있듯이 MAP는 47%정도 나오는걸 알 수 있다.다음은 일반 yolo 모델 분석이다.(추후 추가 예정)
+**MAP : Mean Average Precision**
 
+위에서 알 수 있듯이 tiny 모델의 best MAP는 `48%`정도 일반 모델의 best MAP는 `80%`정도  나오는걸 알 수 있다.
 MAP=Mean Average Precision 클래스 ap의 전체 평균이다.
+
+![image](https://user-images.githubusercontent.com/39875941/97413516-3a36b100-1946-11eb-83ad-75cee367c3e4.png)
+![image](https://user-images.githubusercontent.com/39875941/97413760-8550c400-1946-11eb-955a-c020cb3a2f89.png)
+
+
+
 위 두 결과를 보고 알 수 있는 점
-일반 모델과 tiny 모델과의 성능차이는 map측면에서 봤을 때 약 17%정도 된다.
-3번째 class를 잘 detect하지 못하는 이유는 아무래도 데이터 부족이 원인이라고 추정된다.
-77.13+44.59+18.66 / 3 
+일반 모델과 tiny 모델과의 성능차이는 MAP측면에서 봤을 때 약 `32%`정도 된다.
+
+모든 class의 precision이 올라갔다는걸 알 수 있다.
+
+```
 TP= 제대로 감지한 것
-FP=감지해야하는데 못잡은것
-FN=감지하면 안되는데 잡힌 것
+FP= 감지해야하는데 못잡은것
+FN= 감지하면 안되는데 잡힌 것
+```
 
 IOU Intersection Over Union을 뜻함(교집합 /합집합)
 Ground-truth :예측하고자 하는 관심영역을 뜻함
