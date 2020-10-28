@@ -1,5 +1,5 @@
 # Real time mask-detection on Rasp 3B+ use Yolov3-tiny
-10/29 12:58 ,, 수정중 ,,Due date : 11/10
+10/27,, 수정중 ,,Due date : 11/10
 ## Model Selection
 Mask –Detection을 하기 위해 모델을 선정하던중 네가지 후보 모델을 고려하였다.
 
@@ -166,3 +166,5 @@ SORT = 디텍터 + 칼만필터 + 헝가리안 알고리즘 DeepSORT = 딥러닝
 ![image](https://user-images.githubusercontent.com/39875941/97462038-aedb1100-1981-11eb-8131-b42588f40a25.png)
 ![image](https://user-images.githubusercontent.com/39875941/97462047-b0a4d480-1981-11eb-942a-f7b07ed1ecfb.png)
 ![image](https://user-images.githubusercontent.com/39875941/97462052-b26e9800-1981-11eb-96dc-6e086a7f0d5d.png)
+
+![image](https://user-images.githubusercontent.com/39875941/97463455-1ba2db00-1983-11eb-9cc6-60d747ca5a70.png)
