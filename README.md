@@ -44,9 +44,11 @@ validation과 train 데이터의 비율은 9:1로 진행하였다.처음에 소�
 
 https://www.kaggle.com/andrewmvd/face-mask-detection(마스크 데이터셋)
 
-하지만 해당 데이터셋은 pascal voc 형식의 xml데이터셋이었고,yolo 형식 xml 데이터셋으로 전환을 하기위해 (pascal voc to yolo converter)해당 모듈을 사용하였다.
+하지만 해당 데이터셋은 pascal voc 형식의 xml데이터셋이었고,yolo 형식 xml 데이터셋으로 전환을 하기위해 해당 모듈을 사용하였다.
 
 https://bblib.net/entry/convert-voc-to-yolo-xml-to-yolo-xml-to-txt
+
+(PASCAL VOC to YOLO converter)
 
 
 
@@ -68,14 +70,28 @@ classes = ['with_mask','without_mask','mask_weared_incorrect']#클래스 설정
 
 ## Complie Yolo
 
-windows 환경에서 compile을 수행하였고
+![image](https://user-images.githubusercontent.com/39875941/97408437-6c90e000-193f-11eb-8986-26135692a27b.png)
+
+
+
+
+https://github.com/AlexeyAB/darknet
+
+Windows 환경에서 Compile을 수행하였고 GPU 는 GTX 1650을 사용하였다.
+
+Complie 관련 issue는 위 사이트를 참고했다.
+
 모델은 real-time에 적합한 tiny-yolo를 사용하였다.
 
 loss graph와 iteration별 validation set을 이용한 map 수치 그래프이다.
 
+![image](https://user-images.githubusercontent.com/39875941/97408543-934f1680-193f-11eb-917d-b42348282307.png)
+![image](https://user-images.githubusercontent.com/39875941/97408642-b974b680-193f-11eb-9a31-1b40fd94dbcd.png)
+
+
 YOLO-tiny :About 2 hours YOLO :About 15 hours
-GPU : gtx 1650
-GCP등을 활용했다면 더 빠른 시간안에 가능함
+
+GCP등을 활용했다면 더 빠른 시간안에 가능하다.
 
 위에서 알 수 있듯이 MAP는 47%정도 나오는걸 알 수 있다.다음은 일반 yolo 모델 분석이다.(추후 추가 예정)
 
