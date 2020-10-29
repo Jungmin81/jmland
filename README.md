@@ -152,6 +152,8 @@ Object Detection 모델에서 고려해야 하는건 세가지이다.
 
 SORT = 디텍터 + 칼만필터 + 헝가리안 알고리즘 DeepSORT = 딥러닝 + SORT
 
+How?
+
 ## Real Time Detection result
 
 ![image](https://user-images.githubusercontent.com/39875941/97462038-aedb1100-1981-11eb-8131-b42588f40a25.png)
