@@ -1,4 +1,4 @@
-# USAGE
+# Usage
 # python2 yolo-live-cv2.py --yolo yolo
 
 import numpy as np
@@ -11,9 +11,9 @@ ap = argparse.ArgumentParser()
 ap.add_argument("-y", "--yolo", required=True,
 	help="base path to YOLO directory")
 ap.add_argument("-c", "--confidence", type=float, default=0.5,
-	help="minimum probability to filter weak detections")
+	help="minimum probability to filter weak detections")#신뢰도 설정
 ap.add_argument("-t", "--threshold", type=float, default=0.3,
-	help="threshold when applyong non-maxima suppression")
+	help="threshold when applyong non-maxima suppression")#임계치 설정
 args = vars(ap.parse_args())
 
 labelsPath = os.path.sep.join([args["yolo"], "custom.names"])
@@ -23,8 +23,8 @@ np.random.seed(42)
 COLORS = np.random.randint(0, 255, size=(len(LABELS), 3),
 dtype="uint8")
 
-weightsPath = os.path.sep.join([args["yolo"], "yolov3-custom_final.weights"])
-configPath = os.path.sep.join([args["yolo"], "yolov3-custom.cfg"])
+weightsPath = os.path.sep.join([args["yolo"], "yolov3-custom_final.weights"])#weight file name
+configPath = os.path.sep.join([args["yolo"], "yolov3-custom.cfg"])#config file name
 
 cap = cv2.VideoCapture(0)
 
@@ -34,14 +34,14 @@ net = cv2.dnn.readNetFromDarknet(configPath, weightsPath)
 while True:
         
     _,frame = cap.read()
-    frame = cv2.resize(frame, dsize=(400,400), interpolation=cv2.INTER_CUBIC)
+    frame = cv2.resize(frame, dsize=(400,400), interpolation=cv2.INTER_CUBIC)#창 사이즈
     
     (H, W) = frame.shape[:2]
 
     ln = net.getLayerNames()
     ln = [ln[i[0] - 1] for i in net.getUnconnectedOutLayers()]
 
-    blob = cv2.dnn.blobFromImage(frame, 1 / 255.0, (416, 416),swapRB=True, crop=False)
+    blob = cv2.dnn.blobFromImage(frame, 1 / 255.0, (320, 320),swapRB=True, crop=False)#train한 width와 height를 맞춰줘야함
     net.setInput(blob)
     start = time.time()
     layerOutputs = net.forward(ln)
