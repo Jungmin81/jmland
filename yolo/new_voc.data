@@ -1,0 +1,6 @@
+classes= 3
+train  = C:\Users\CHEON\Desktop\mteg\mask-detection\train_test\train.txt
+valid  = C:\Users\CHEON\Desktop\mteg\mask-detection\train_test\test.txt
+names = C:\Users\CHEON\Desktop\mteg\mask-detection\yolo\new_voc.names
+backup = C:\Users\CHEON\Desktop\mteg\mask-detection\backup
+
