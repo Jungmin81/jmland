@@ -94,25 +94,19 @@ GCP등을 활용했다면 더 빠른 시간안에 가능하다.
 
 **MAP : Mean Average Precision**
 
-위에서 알 수 있듯이 tiny 모델의 best MAP는 `48%`정도 일반 모델의 best MAP는 `80%`정도  나오는걸 알 수 있다.
+위에서 알 수 있듯이 tiny 모델의 best MAP는 `47%`정도 일반 모델의 best MAP는 `80%`정도  나오는걸 알 수 있다.
+MAP=Mean Average Precision 클래스 ap의 전체 평균이다.
 
-
-![image](https://user-images.githubusercontent.com/39875941/97413516-3a36b100-1946-11eb-83ad-75cee367c3e4.png)
-![image](https://user-images.githubusercontent.com/39875941/97413760-8550c400-1946-11eb-955a-c020cb3a2f89.png)
-
-
-
+![image](https://user-images.githubusercontent.com/39875941/97412777-5a19a500-1945-11eb-862f-eb21b65c606e.png)
+![image](https://user-images.githubusercontent.com/39875941/97412788-5d149580-1945-11eb-9479-a9ef817069af.png)
 위 두 결과를 보고 알 수 있는 점
-일반 모델과 tiny 모델과의 성능차이는 MAP측면에서 봤을 때 약 `32%`정도 된다.
 
-모든 class의 precision이 올라갔다는걸 알 수 있다.
-
-```
-MAP=Mean Average Precision 클래스별 ap의 전체 평균이다.
+일반 모델과 tiny 모델과의 성능차이는 MAP측면에서 봤을 때 약 37%정도 된다.
+3번째 class를 잘 detect하지 못하는 이유는 아무래도 데이터 부족이 원인이라고 추정된다.
+77.13+44.59+18.66 / 3 
 TP= 제대로 감지한 것
-FP= 감지해야하는데 못잡은것
-FN= 감지하면 안되는데 잡힌 것
-```
+FP=감지해야하는데 못잡은것
+FN=감지하면 안되는데 잡힌 것
 
 IOU Intersection Over Union을 뜻함(교집합 /합집합)
 Ground-truth :예측하고자 하는 관심영역을 뜻함
@@ -158,13 +152,6 @@ Object Detection 모델에서 고려해야 하는건 세가지이다.
 - 2.DeepSORT 알고리즘적용
 
 
-
+![image](https://user-images.githubusercontent.com/39875941/97409508-12911a00-1941-11eb-9cf5-fbc4c391dc9f.png)
+![image](https://user-images.githubusercontent.com/39875941/97409515-145add80-1941-11eb-8eaf-44307ecfbf27.png)
 SORT = 디텍터 + 칼만필터 + 헝가리안 알고리즘 DeepSORT = 딥러닝 + SORT
-
-## Real Time Detection result
-
-![image](https://user-images.githubusercontent.com/39875941/97462038-aedb1100-1981-11eb-8131-b42588f40a25.png)
-![image](https://user-images.githubusercontent.com/39875941/97462047-b0a4d480-1981-11eb-942a-f7b07ed1ecfb.png)
-![image](https://user-images.githubusercontent.com/39875941/97462052-b26e9800-1981-11eb-96dc-6e086a7f0d5d.png)
-
-![image](https://user-images.githubusercontent.com/39875941/97463455-1ba2db00-1983-11eb-9cc6-60d747ca5a70.png)
