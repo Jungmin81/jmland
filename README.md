@@ -165,7 +165,7 @@ SORT = 디텍터 + 칼만필터 + 헝가리안 알고리즘 DeepSORT = 딥러닝
 ## Conclusion
 
 | 비교 | Yolo | Yolo-tiny |
-|:---:|:---:|:---:|:---:|
+|:---:|:---:|:---:|
 |Train time| 15 hours|2 hours|
 |MAP|80%|48%|
 |IOU|57%|69%|
