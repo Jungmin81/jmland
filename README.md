@@ -90,15 +90,6 @@ backup = backup
 eval=coco
 ```
 .data파일의 경로와 클래스수를 사용환경에 맞게 수정해준다.
-```ini
-~~~.data
-classes= 80
-train  = <replace with your path>/trainvalno5k.txt
-valid = <replace with your path>/testdev2017.txt
-names = data/coco.names
-backup = backup
-eval=coco
-```
 
 모델은 real-time에 적합한 tiny-yolo를 사용하였다.
 
