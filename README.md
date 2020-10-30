@@ -154,6 +154,31 @@ SORT = 디텍터 + 칼만필터 + 헝가리안 알고리즘 DeepSORT = 딥러닝
 
 ## Raspberry pi 3B+ Setting & files
 
+
+
+Detector 모듈과 Live Detection모듈은 밑의 링크에서 참고했다.
+
+
+(출처 : https://github.com/rushad7/mask-detection)
+
+```python
+yolo-live-cv2.py
+
+labelsPath = os.path.sep.join([args["yolo"], "custom.names"])#class list file 
+weightsPath = os.path.sep.join([args["yolo"], "yolov3-custom_final.weights"])#weight file
+configPath = os.path.sep.join([args["yolo"], "yolov3-custom.cfg"])#config file
+
+~~~
+    frame = cv2.resize(frame, dsize=(400,400), interpolation=cv2.INTER_CUBIC)#창 사이즈 설정
+    blob = cv2.dnn.blobFromImage(frame, 1 / 255.0, (320, 320),swapRB=True, crop=False)#train한 width와 height를 맞춰줘야함
+
+
+```
+
+위와 같이 경로 설정 및 기타 설정을 해줘야 한다.
+
+custom-detector의 사용법은 py파일을 참고할 것.
+
 ## Real Time Detection result
 
 ![image](https://user-images.githubusercontent.com/39875941/97462038-aedb1100-1981-11eb-8131-b42588f40a25.png)
