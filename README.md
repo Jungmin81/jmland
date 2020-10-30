@@ -1,5 +1,22 @@
 # Real time mask-detection on Rasp 3B+ use Yolov3-tiny
-10/27,, 수정중 ,,Due date : 11/10
+10/30 10:42 수정중 ,,Due date : 11/2
+
+## About Object Detection
+
+- Object Detection의 성능이란?
+
+Object detection 관련 논문을 읽다 보면 초기의 논문들은 대부분 성능에 `정확도` 지표를 사용하고 있는 것을 확인할 수 있습니다. Object Detection 뿐만 아니라 다양한 Task의 논문들을 살펴보면 대부분 연구 초기에는 주로 `정확도`라는 지표를 올리기 위한 연구를 수행합니다. Object Detection에서는 이 `정확도` 라는 지표를 어떻게 나타낼 수 있을까요?
+
+정확도의 계산은 주로 `정답(Ground Truth, 이하 GT)`와 모델이 예측한 결과`(Prediction)` 간의 비교를 통해 이루어집니다. Image Classification의 경우에는 GT가 이미지의 class인 반면, Object Detection은 `이미지의 각 object의 해당하는 Bounding Box와 Box 안의 class`를 의미합니다. 즉 정확도가 높다는 것은 모델이 GT와 유사한 Bounding Box를 예측(Regression)하면서 동시에 Box 안의 object의 class를 잘 예측(Classification)하는 것을 의미합니다. `즉 class도 정확하게 예측하면서, 동시에 object의 영역까지 잘 예측을 해야 합니다`.
+
+보통 Object Detection 논문에서 사용하는 정확도의 경우 Class를 예측하지 못하면 실패로 간주됩니다. Class를 올바르게 예측하였을 때의 Bounding Box의 정확도를 기준으로 정확도를 측정하게 됩니다. 이제 이 정확도를 어떻게 측정하는지에 대해 설명을 드리겠습니다.
+
+- IoU (Intersection Over Union)
+
+![precision_recall_iou](https://hsto.org/files/ca8/866/d76/ca8866d76fb840228940dbf442a7f06a.jpg)
+Object Detection에서 Bounding Box를 얼마나 잘 예측하였는지는 IoU라는 지표를 통해 측정하게 됩니다. `IoU(Intersection Over Union)`는 Object Detection, Segmentation 등에서 자주 사용되며, 영어 뜻 자체로 이해를 하면 “교집합/합집합” 이라는 뜻을 가지고 있습니다. 실제로 계산도 그러한 방식으로 이루어집니다. Object Detection의 경우 `모델이 예측한 결과와 GT, 두 Box 간의 교집합과 합집합을 통해 IoU를 측정`합니다.
+
+(출처 : https://hoya012.github.io/blog/Tutorials-of-Object-Detection-Using-Deep-Learning-how-to-measure-performance-of-object-detection/ )
 ## Model Selection
 Mask –Detection을 하기 위해 모델을 선정하던중 네가지 후보 모델을 고려하였다.
 
@@ -41,6 +58,13 @@ Labelimg를 이용하여 2개의 class(mask,no-mask)를 yolo데이터셋을 만�
 https://github.com/tzutalin/labelImg(데이터 라벨링 툴)
 
 validation과 train 데이터의 비율은 9:1로 진행하였다.처음에 소량의 데이터로 진행해서 그런지 detection이 제대로 되지않아 kaggle에서 데이터셋을 구한뒤 다시 진행 하였다.
+```python
+test_train_split.py
+
+file_train = open(r'C:\Users\JM\Desktop\JM\mask-detection\train_test\train.txt', 'w')
+file_test = open(r'C:\Users\JM\Desktop\JM\mask-detection\train_test\test.txt', 'w')
+```
+split을 수행하기전 파일의 경로와 확장자를 바꿔줘야 한다.
 
 https://www.kaggle.com/andrewmvd/face-mask-detection(마스크 데이터셋)
 
@@ -198,7 +222,7 @@ Object Detection 모델에서 고려해야 하는건 세가지이다.
 - 여기서 알 수 있는 문제점 Iou가 50%로 위의 사진처럼 예측이 제대로 되는건 아니다.
 즉,잘 맞추긴 맞췄으나,맞춰야 하는 부분의 50%정도만 예측하고 있는 상황이다.
 `IOU 수치가 많이 작은거 같다.`
-![precision_recall_iou](https://hsto.org/files/ca8/866/d76/ca8866d76fb840228940dbf442a7f06a.jpg)
+
 
 
 ## 앞으로 적용해볼 것들
