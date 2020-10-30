@@ -80,6 +80,25 @@ https://github.com/AlexeyAB/darknet
 Windows 환경에서 Compile을 수행하였고 GPU 는 `GTX 1650`을 사용하였다.
 
 Complie 관련 issue는 위 사이트를 참고했고,`Default Configure`을 사용하였다.
+```ini
+~~~.data
+classes= 80
+train  = <replace with your path>/trainvalno5k.txt
+valid = <replace with your path>/testdev2017.txt
+names = data/coco.names
+backup = backup
+eval=coco
+```
+.data파일의 경로와 클래스수를 사용환경에 맞게 수정해준다.
+```ini
+~~~.data
+classes= 80
+train  = <replace with your path>/trainvalno5k.txt
+valid = <replace with your path>/testdev2017.txt
+names = data/coco.names
+backup = backup
+eval=coco
+```
 
 모델은 real-time에 적합한 tiny-yolo를 사용하였다.
 
@@ -119,39 +138,6 @@ Precision = 모델에서 예측된 관심영역
 
 
 
-
-결과물
-
-
-
-
-raspberry에서 
-tiny 모델의 경우 0.8초에 1프레임 일반 모델일 경우 15초에 1 프레임 분석 가능 
-아쉬운 점 
-Object Detection 모델에서 고려해야 하는건 세가지이다.
-
-첫 번째,IOU를 고려하지 않고,ground truth를 잡았는지 ?
-
-두 번쨰,ground truth를 잡았을 때 IOU가 어느정도 되는지 ?
-
-세 번째,오탐지를 어느정도 하는지 ? 
-
-- 1.여기서 알 수 있는 문제점 Iou가 50%로 위의 사진처럼 예측이 제대로 되는건 아니다.즉,잘 맞추긴 맞췄으나,맞춰야 하는 부분의 50%정도만 예측하고 있는 상황이다.
-
-| Case | Yolo | Yolo-tiny |
-|:---:|:---:|:---:|
-|1|![image](https://user-images.githubusercontent.com/39875941/97409490-0907b200-1941-11eb-8dc0-b3484ea1c4b4.png)|![image](https://user-images.githubusercontent.com/39875941/97409502-0e64fc80-1941-11eb-97da-34769381eac5.png)|
-|2|![image](https://user-images.githubusercontent.com/39875941/97409515-145add80-1941-11eb-8eaf-44307ecfbf27.png)|![image](https://user-images.githubusercontent.com/39875941/97409508-12911a00-1941-11eb-9cf5-fbc4c391dc9f.png)|
-
-
-둘 다 비교적 잘잡긴 하나 tiny모델은 case 1의 경우 오탐지 1건 미탐지 1건의 차이를 찾을 수 있다.
-
-- 2.DeepSORT 알고리즘적용
-
-
-
-SORT = 디텍터 + 칼만필터 + 헝가리안 알고리즘 DeepSORT = 딥러닝 + SORT
-
 ## Raspberry pi 3B+ Setting & files
 
 
@@ -164,8 +150,10 @@ Detector 모듈과 Live Detection모듈은 밑의 링크에서 참고했다.
 ```python
 yolo-live-cv2.py
 
-labelsPath = os.path.sep.join([args["yolo"], "custom.names"])#class list file 
-weightsPath = os.path.sep.join([args["yolo"], "yolov3-custom_final.weights"])#weight file
+labelsPath = os.path.sep.join([args["yolo"], "custom.names"])
+#class list file 
+weightsPath = os.path.sep.join([args["yolo"], "yolov3-custom_final.weights"])
+#weight file
 configPath = os.path.sep.join([args["yolo"], "yolov3-custom.cfg"])#config file
 
 ~~~
@@ -197,3 +185,34 @@ custom-detector의 사용법은 py파일을 참고할 것.
 |MAP|80%|48%|
 |IOU|69%|57%|
 |fps|0.06fps|1.25fps|
+
+성능면에서는 일반 Yolo 모델이 월등히 우수하지만 Real-Time에서 사용하기에는 Yolo-tiny모델이 더 사용하기 적합하다는 것을 알 수 있다.
+
+| Case | Yolo | Yolo-tiny |
+|:---:|:---:|:---:|
+|1|![image](https://user-images.githubusercontent.com/39875941/97409490-0907b200-1941-11eb-8dc0-b3484ea1c4b4.png)|![image](https://user-images.githubusercontent.com/39875941/97409502-0e64fc80-1941-11eb-97da-34769381eac5.png)|
+|2|![image](https://user-images.githubusercontent.com/39875941/97409515-145add80-1941-11eb-8eaf-44307ecfbf27.png)|![image](https://user-images.githubusercontent.com/39875941/97409508-12911a00-1941-11eb-9cf5-fbc4c391dc9f.png)|
+
+Validation data의 test결과이다.자세히 확인해보면 일반 tiny 모델이 detection측면에서 좀 더 좋긴 하지만 눈으로 봐서는 별 차이가 없다는 것을 알 수 있다.
+
+## 아쉬운 점 
+Object Detection 모델에서 고려해야 하는건 세가지이다.
+
+*첫 번째,IOU를 고려하지 않고,ground truth를 잡았는지 ?*
+
+*두 번쨰,ground truth를 잡았을 때 IOU가 어느정도 되는지 ?*
+
+*세 번째,오탐지를 어느정도 하는지 ?* 
+
+- 여기서 알 수 있는 문제점 Iou가 50%로 위의 사진처럼 예측이 제대로 되는건 아니다.
+즉,잘 맞추긴 맞췄으나,맞춰야 하는 부분의 50%정도만 예측하고 있는 상황이다.
+`IOU 수치가 많이 작은거 같다.`
+![precision_recall_iou](https://hsto.org/files/ca8/866/d76/ca8866d76fb840228940dbf442a7f06a.jpg)
+
+
+## 앞으로 적용해볼 것들
+- DeepSORT 알고리즘적용
+
+
+
+SORT = 디텍터 + 칼만필터 + 헝가리안 알고리즘 DeepSORT = 딥러닝 + SORT
