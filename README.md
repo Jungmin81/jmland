@@ -114,7 +114,7 @@ names = data/coco.names
 backup = backup
 eval=coco
 ```
-.data파일의 경로와 클래스수를 사용환경에 맞게 수정해준다.
+.data파일의 경로와 클래스수를 사용환경에 맞게 수정해준다.그 외에도 .cfg파일을 수정해야 하는데 위의 사이트를 참고해볼것.
 
 모델은 real-time에 적합한 tiny-yolo를 사용하였다.
 
