@@ -2,7 +2,7 @@
 
 
 ## About Object Detection
----
+
 - Object Detection의 성능이란?
 
     Object detection 관련 논문을 읽다 보면 초기의 논문들은 대부분 성능에 `정확도` 지표를 사용하고 있는 것을 확인할 수 있습니다. Object Detection 뿐만 아니라 다양한 Task의 논문들을 살펴보면 대부분 연구 초기에는 주로 `정확도`라는 지표를 올리기 위한 연구를 수행합니다. Object Detection에서는 이 `정확도` 라는 지표를 어떻게 나타낼 수 있을까요?
@@ -16,9 +16,9 @@
     ![precision_recall_iou](https://hsto.org/files/ca8/866/d76/ca8866d76fb840228940dbf442a7f06a.jpg)
     Object Detection에서 Bounding Box를 얼마나 잘 예측하였는지는 IoU라는 지표를 통해 측정하게 됩니다. `IoU(Intersection Over Union)`는 Object Detection, Segmentation 등에서 자주 사용되며, 영어 뜻 자체로 이해를 하면 “교집합/합집합” 이라는 뜻을 가지고 있습니다. 실제로 계산도 그러한 방식으로 이루어집니다. Object Detection의 경우 `모델이 예측한 결과와 GT, 두 Box 간의 교집합과 합집합을 통해 IoU를 측정`합니다.
 
-    (출처 : https://hoya012.github.io/blog/Tutorials-of-Object-Detection-Using-Deep-Learning-how-to-measure-performance-of-object-detection/ )
+    > 출처 : https://hoya012.github.io/blog/Tutorials-of-Object-Detection-Using-Deep-Learning-how-to-measure-performance-of-object-detection/ 
 ## Model Selection
----
+
 Mask –Detection을 하기 위해 모델을 선정하던중 네가지 후보 모델을 고려하였다.
 
 - Faster R-CNN
@@ -46,18 +46,18 @@ Mask –Detection을 하기 위해 모델을 선정하던중 네가지 후보 �
 
     ![image](https://user-images.githubusercontent.com/39875941/97381191-e60edb00-190b-11eb-9d96-7da59feb1564.png)
 
-    (출처 : https://jetsonaicar.tistory.com/12 )
+    > 출처 : https://jetsonaicar.tistory.com/12 
 
 위 사항들을 모두 고려해봤을 때 **YOLO**를 사용하는게 제일 적합하다고 생각하여 **YOLO**를 사용하게 되었다.
 
 ## Data Preparation
----
+
 
 ![image](https://user-images.githubusercontent.com/39875941/97381302-2b330d00-190c-11eb-8e09-94678695f098.png)
 
 Labelimg를 이용하여 2개의 class(mask,no-mask)를 yolo데이터셋을 만듬.각 클래스 별 100개정도 총 200개의 데이터로 모델 학습을 진행하였다.
 
-https://github.com/tzutalin/labelImg(데이터 라벨링 툴)
+> https://github.com/tzutalin/labelImg(데이터 라벨링 툴)
 
 validation과 train 데이터의 비율은 9:1로 진행하였다.처음에 소량의 데이터로 진행해서 그런지 detection이 제대로 되지않아 kaggle에서 데이터셋을 구한뒤 다시 진행 하였다.
 ```python
@@ -68,13 +68,11 @@ file_test = open(r'C:\Users\JM\Desktop\JM\mask-detection\train_test\test.txt', '
 ```
 split을 수행하기전 파일의 경로와 확장자를 바꿔줘야 한다.
 
-https://www.kaggle.com/andrewmvd/face-mask-detection(마스크 데이터셋)
+> https://www.kaggle.com/andrewmvd/face-mask-detection(마스크 데이터셋)
 
 하지만 해당 데이터셋은 pascal voc 형식의 xml데이터셋이었고,yolo 형식 xml 데이터셋으로 전환을 하기위해 해당 모듈을 사용하였다.
 
-https://bblib.net/entry/convert-voc-to-yolo-xml-to-yolo-xml-to-txt
-
-(PASCAL VOC to YOLO converter)
+> https://bblib.net/entry/convert-voc-to-yolo-xml-to-yolo-xml-to-txt(PASCAL VOC to YOLO converter)
 
 
 
@@ -95,14 +93,14 @@ classes = ['with_mask','without_mask','mask_weared_incorrect']#클래스 설정
 해당 데이터셋은 마스크를 이상하게 쓴 데이터를 포함해 총 3개의 클래스로 데이터셋 준비를 하였다.
 
 ## Complie Yolo & train Model
----
+
 
 ![image](https://user-images.githubusercontent.com/39875941/97408437-6c90e000-193f-11eb-8986-26135692a27b.png)
 
 
 
 
-https://github.com/AlexeyAB/darknet
+> https://github.com/AlexeyAB/darknet
 
 Windows 환경에서 Compile을 수행하였고 GPU 는 `GTX 1650`을 사용하였다.
 
@@ -156,12 +154,12 @@ Precision = 모델에서 예측된 관심영역
 
 ## Raspberry pi 3B+ Setting & files
 
----
+
 
 Detector 모듈과 Live Detection모듈은 밑의 링크에서 참고했다.
 
 
-(출처 : https://github.com/rushad7/mask-detection)
+> 출처 : https://github.com/rushad7/mask-detection 
 
 ```python
 yolo-live-cv2.py
@@ -184,7 +182,7 @@ configPath = os.path.sep.join([args["yolo"], "yolov3-custom.cfg"])#config file
 custom-detector의 사용법은 py파일을 참고할 것.
 
 ## Real Time Detection result
----
+
 
 ```linux
 python yolo-live-cv2.py --yolo yolo
@@ -204,7 +202,7 @@ pycam에 나오는 결과이다.성공적으로 세개의 클래스에 대해 �
 
 
 ## Conclusion
----
+
 | 비교 | Yolo | Yolo-tiny |
 |:---:|:---:|:---:|
 |Train time| 15 hours|2 hours|
@@ -223,7 +221,7 @@ pycam에 나오는 결과이다.성공적으로 세개의 클래스에 대해 �
 Validation data의 test결과이다.자세히 확인해보면 일반 tiny 모델이 detection측면에서 좀 더 좋긴 하지만 눈으로 봐서는 별 차이가 없다는 것을 알 수 있다.
 
 ## 아쉬운 점 
----
+
 Object Detection 모델에서 고려해야 하는건 세가지이다.
 
 *첫 번째,IOU를 고려하지 않고,ground truth를 잡았는지 ?*
@@ -239,7 +237,7 @@ Object Detection 모델에서 고려해야 하는건 세가지이다.
 
 
 ## 앞으로 적용해볼 것들
----
+
 - Object Tracking을 위한 DeepSORT 알고리즘 적용
 
     ![image](https://ssvar.ch/wp-content/uploads/2019/12/object-detection-and-tracking-using-mediapipe.gif)
@@ -282,4 +280,4 @@ Object Detection 모델에서 고려해야 하는건 세가지이다.
 
 딥소트는 위와 같은 느낌으로, 실제로 코드를 보면 각 코드의 영역이 무엇을 하는지 파악하는 것이 크게 어렵지 않다. 개인적으로 딥소트의 트래킹 성능에 가장 크게 영향을 끼치는 것은 디텍션으로, 디텍션을 맡고 있는 YOLO3 의 성능이 가장 중요한 것 같다.
 
-(출처 : http://blog.haandol.com/2020/02/27/deep-sort-with-mxnet-yolo3.html)
+> 출처 : http://blog.haandol.com/2020/02/27/deep-sort-with-mxnet-yolo3.html 
