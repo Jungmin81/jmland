@@ -240,8 +240,8 @@ Object Detection 모델에서 고려해야 하는건 세가지이다.
 
 - Object Tracking을 위한 DeepSORT 알고리즘 적용
 
-    ![image](https://ssvar.ch/wp-content/uploads/2019/12/object-detection-and-tracking-using-mediapipe.gif)
-
+    ![sort](Result/deepsort.gif)
+    
     현재의 detection은 단순히 모든 프레임을 탐지하는것 뿐이다.좌측의 detection을 수행하고 있다고 생각하면 된다.
 
     tracking알고리즘이 추가된 우측의 detection이 더 좋은 detection이라고 할 수 있다. 
