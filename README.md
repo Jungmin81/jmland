@@ -281,3 +281,12 @@ Object Detection 모델에서 고려해야 하는건 세가지이다.
 딥소트는 위와 같은 느낌으로, 실제로 코드를 보면 각 코드의 영역이 무엇을 하는지 파악하는 것이 크게 어렵지 않다. 개인적으로 딥소트의 트래킹 성능에 가장 크게 영향을 끼치는 것은 디텍션으로, 디텍션을 맡고 있는 YOLO3 의 성능이 가장 중요한 것 같다.
 
 > 출처 : http://blog.haandol.com/2020/02/27/deep-sort-with-mxnet-yolo3.html 
+
+## 11/03 Issue(Using Augumentation)
+
+|Use mosaic|Not use|
+|:--:|:--:|
+![chart_n_yolov3-tiny3](https://user-images.githubusercontent.com/39875941/97950357-ef031f00-1dd9-11eb-8fa9-e323e3818c8a.png)|![chart_n_yolov3-tiny2](https://user-images.githubusercontent.com/39875941/97408940-3011b400-1940-11eb-87a8-b340f38c0deb.png)|
+
+**MAP 6% Increase**
+
