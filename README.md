@@ -290,3 +290,6 @@ Object Detection 모델에서 고려해야 하는건 세가지이다.
 
 **MAP 6% Increase**
 
+|lr / 10|lr * 10|
+|:--:|:--:|
+![chart_n_yolov3-tiny4](https://user-images.githubusercontent.com/39875941/98185319-b5ecbb00-1f4f-11eb-8a3b-cdb859fe0f0f.png)|![chart_n_yolov3-tiny5](https://user-images.githubusercontent.com/39875941/98185321-b8e7ab80-1f4f-11eb-95e5-4ea9e1b3ece4.png)|
